@@ -43,16 +43,12 @@ $f3->route('GET|POST /survey', function($f3){
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        //Store the data in the session array
-        $_SESSION['name'] = $_POST['name'];
-        $_SESSION['checkbox'] = $_POST['check'];
+            //Store the data in the session array
+            $_SESSION['name'] = $_POST['name'];
+            $_SESSION['checkbox'] = $_POST['check'];
+            $f3->reroute('/summary');
 
-        //Redirect to Order 2 page
-        $f3->reroute('/summary');
     }
-
-    /*    $view = new Template();
-        echo $view->render('views/home.html');*/
 });
 
 $f3->route('GET /summary', function(){
@@ -63,24 +59,7 @@ $f3->route('GET /summary', function(){
     echo '<p><strong>Your Answers:</strong></p>';
     echo '<p>'.implode($_SESSION['checkbox'], ", ").'</p>';
     echo '</pre>';
-/*
 
-    echo '<h1>Midterm Survey</h1>';
-
-    echo '<form></form><label for="first"><strong>Name</strong></label> ';
-    echo '<input type="text" id="first" name="first">';
-    echo '<br><br>';
-    echo'<label ><strong>Check all that apply</strong></label><br><br>';
-    for($i = 0; $i < sizeof($checkbox); $i++) {
-        echo '<input  type="checkbox" name= "check[]" value="'.$checkbox[$i].' ">' . " ".$checkbox[$i].'</input>';
-        echo '<br><br>';
-    }
-    echo '<button type="submit">Submit</button></form>';
-    echo '</pre>';
-    echo '';*/
-
-    /*    $view = new Template();
-        echo $view->render('views/home.html');*/
     session_destroy();
 });
 
